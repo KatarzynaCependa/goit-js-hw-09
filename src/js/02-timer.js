@@ -2,22 +2,6 @@ import flatpickr from 'flatpickr';
 // Dodatkowy import stylów
 import 'flatpickr/dist/flatpickr.min.css';
 
-const options = {
-  enableTime: true,
-  time_24hr: true,
-  defaultDate: new Date(),
-  minuteIncrement: 1,
-  onClose(selectedDates) {
-    pickedDate = selectedDates[0].getTime();
-    if (pickedDate < Date.parse(options.defaultDate)) {
-      window.alert('Please choose a date in the future');
-      btnEl.setAttribute('disabled', '');
-    } else {
-      btnEl.disabled = false;
-    }
-  },
-};
-
 const inputEl = document.getElementById('datetime-picker');
 const btnEl = document.querySelector('button');
 const daysValue = document.querySelector('span[data-days]');
@@ -29,6 +13,23 @@ let pickedDate = 0;
 let millisecondsLeft = 0;
 let timeLeft = 0;
 let timerId = {};
+
+const options = {
+  enableTime: true,
+  time_24hr: true,
+  defaultDate: new Date(),
+  minuteIncrement: 1,
+  onClose(selectedDates) {
+    pickedDate = selectedDates[0].getTime();
+
+    if (pickedDate < Date.parse(options.defaultDate)) {
+      window.alert('Please choose a date in the future');
+      btnEl.setAttribute('disabled', '');
+    } else {
+      btnEl.disabled = false;
+    }
+  },
+};
 
 flatpickr(inputEl, options);
 
