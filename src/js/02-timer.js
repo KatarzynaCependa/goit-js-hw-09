@@ -27,6 +27,7 @@ const secondsValue = document.querySelector('span[data-seconds]');
 
 let pickedDate = 0;
 let millisecondsLeft = 0;
+let timeLeft = 0;
 let timerId = {};
 
 flatpickr(inputEl, options);
