@@ -9,7 +9,6 @@ const options = {
   minuteIncrement: 1,
   onClose(selectedDates) {
     pickedDate = selectedDates[0].getTime();
-    millisecondsLeft = pickedDate - new Date().getTime();
     if (pickedDate < Date.parse(options.defaultDate)) {
       window.alert('Please choose a date in the future');
       btnEl.setAttribute('disabled', '');
@@ -69,14 +68,16 @@ const onClick = () => {
   timerId = setInterval(() => {
     millisecondsLeft = pickedDate - new Date().getTime();
     timeLeft = convertMs(millisecondsLeft);
+
     daysValue.textContent = addLeadingZero(timeLeft.days);
     hoursValue.textContent = addLeadingZero(timeLeft.hours);
     minutesValue.textContent = addLeadingZero(timeLeft.minutes);
     secondsValue.textContent = addLeadingZero(timeLeft.seconds);
+
+    if (millisecondsLeft < 0) {
+      endCountdown();
+    }
   }, 1000);
-  if (millisecondsLeft < 0) {
-    endCountdown();
-  }
 };
 
 btnEl.addEventListener('click', onClick);
